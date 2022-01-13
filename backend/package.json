@@ -1,0 +1,35 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ./bin/www",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "connect-mongo": "^3.2.0",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "excel": "^1.0.1",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "helmet": "^4.2.0",
+        "identity-client": "file:../../identity-client",
+        "jsonexcel": "^2.0.3",
+        "less-middleware": "^3.1.0",
+        "moment": "^2.29.1",
+        "momentjs": "^2.0.0",
+        "mongoose": "^5.11.4",
+        "morgan": "^1.10.0",
+        "node-cron": "^3.0.0",
+        "nodemailer": "^6.7.1",
+        "read-excel-file": "^4.1.0",
+        "serve-favicon": "^2.5.0",
+        "serve-static": "^1.14.1"
+    }
+}
