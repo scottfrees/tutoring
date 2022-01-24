@@ -8,6 +8,9 @@ const s = new Schema({
         type: String,
         required: true
     },
+    searchable: {
+        type: String
+    },
     subject: {
         type: String,
         required: true
@@ -52,8 +55,7 @@ const s = new Schema({
     start: String,
     end: String,
     delivery: {
-        type: String,
-        enum: enums.delivery.values
+        type: String
     },
     instructor: {
         name: {
@@ -63,3 +65,7 @@ const s = new Schema({
         email: String
     }
 });
+
+const sections = mongoose.model('section', s);
+
+module.exports = sections;

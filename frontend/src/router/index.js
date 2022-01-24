@@ -16,9 +16,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Users.vue')
   },
   {
+    path: '/rooms',
+    name: 'Rooms',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Rooms.vue')
+  },
+  {
     path: '/tutoring',
     name: 'Tutoring',
     component: () => import(/* webpackChunkName: "about" */ '../views/Tutoring.vue')
+  },
+  {
+    path: '/tutoring/setup',
+    name: 'TutorSessionSetup',
+    component: () => import(/* webpackChunkName: "about" */ '../views/TutorSessionSetup.vue')
   },
   {
     path: '/search',

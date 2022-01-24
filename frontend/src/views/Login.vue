@@ -106,9 +106,9 @@ export default {
 }
 @media only screen and (min-width: 768px) {
   .card {
-    float: right;
-    margin-right: 20%;
-    margin-top: 10em;
+    float: left;
+    margin-left: 5em;
+    margin-top: 5em;
     min-width: 400px;
   }
 }

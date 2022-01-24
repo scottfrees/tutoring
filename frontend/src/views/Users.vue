@@ -104,7 +104,7 @@
       section
         ul.list-group.list-group-flush
           li.list-group-item(v-for="user in staff")
-            .row.border-bottom
+            .row
               .col-6
                 p {{ user.name.first }} {{ user.name.last }}
               .col-4.text-right
@@ -124,7 +124,7 @@
       section
         ul.list-group.list-group-flush
           li.list-group-item(v-for="user in tutors")
-            .row.border-bottom
+            .row
               .col-6
                 p {{ user.name.first }} {{ user.name.last }}
               .col-4.text-right

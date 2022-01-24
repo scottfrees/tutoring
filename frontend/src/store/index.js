@@ -3,15 +3,18 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 import UserService from "@/api/users";
+import RoomService from "@/api/rooms";
 export default new Vuex.Store({
   state: {
     admins: [],
     staff: [],
     tutors: [],
+    rooms: [],
     user: null,
     is_admin: false,
     is_staff: false,
-    is_tutor: false
+    is_tutor: false,
+    ts: null,
   },
   mutations: {
     users(state, users) {
@@ -22,6 +25,9 @@ export default new Vuex.Store({
       } else {
         state.is_admin = state.is_staff = state.is_tutor = false;
       }
+    },
+    rooms(state, rooms) {
+      state.rooms = rooms;
     },
     login(state, user) {
       state.user = user;
@@ -34,11 +40,17 @@ export default new Vuex.Store({
         state.is_admin = state.is_staff = state.is_tutor = false;
       }
     },
+    tutoring_session(state, session) {
+      state.ts = session;
+    }
   },
   actions: {
     async init({ commit }) {
       const users = await UserService.fetch();
       commit('users', users);
+
+      const rooms = await RoomService.fetch();
+      commit('rooms', rooms);
     }
   },
   modules: {

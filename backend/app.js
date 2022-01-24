@@ -62,11 +62,9 @@ app.use(session({
 
 
 app.use('/api/users', require('./routes/users'));
-//app.use('/api/staff', require('./routes/staff'));
-//app.use('/api/tutors', require('./routes/tutors'));
-//app.use('/api/rooms', require('./routes/rooms'));
-//app.use('/api/sections', require('./routes/sections'));
-//app.use('/api/tutoring', require('./routes/tutoring'));
+app.use('/api/rooms', require('./routes/rooms'));
+app.use('/api/sections', require('./routes/sections'));
+app.use('/api/tutoring', require('./routes/tutoring'));
 app.use('/api/auth', require('./routes/authentication'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => { res.sendFile(path.join(__dirname, 'public', 'index.html')); });

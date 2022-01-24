@@ -17,7 +17,6 @@ const s = new Schema({
 });
 
 s.statics.is_admin = (user) => {
-    console.log(user);
     return user.roles.filter(r => r === 'admin').length > 0;
 }
 

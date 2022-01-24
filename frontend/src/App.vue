@@ -18,6 +18,8 @@
         li.nav-item(v-if="is_admin || is_staff")
           router-link.nav-link(to="/users") Users
         li.nav-item(v-if="is_admin || is_staff")
+          router-link.nav-link(to="/rooms") Rooms
+        li.nav-item(v-if="is_admin || is_staff")
           router-link.nav-link(to="/tutoring") Tutoring Setup
         li.nav-item
           router-link.nav-link(to="/search") Find Tutoring
