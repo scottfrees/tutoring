@@ -10,7 +10,7 @@ div
       span.mr-2(v-if="schedule.S") Saturday
       span.mr-2(v-if="schedule.U") Sunday
       br
-      span 
+      span(v-if="schedule.start_time && schedule.end_time") 
         Time(:time="schedule.start_time") 
         span -
         Time(:time="schedule.end_time")
