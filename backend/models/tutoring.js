@@ -43,6 +43,9 @@ const s = new Schema({
         virtual_link: {
             type: String
         },
+        appointment: {
+            type: Boolean
+        },
         room: {
             type: String
         },

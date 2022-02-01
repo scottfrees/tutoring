@@ -4,21 +4,27 @@ span {{ display }}
 
 
 <script>
+import moment from "moment";
 export default {
   name: "CourseTime",
   props: ["time"],
   computed: {
     display() {
-      if (this.time) {
-        const mm = this.time.slice(-2);
-        const HH = parseInt(this.time.slice(0, -2).padStart(2, "0"));
-        const h = HH > 12 ? HH - 12 : HH;
-        const A = HH >= 12 ? "PM" : "AM";
-        if (h == 0) return "";
-        return h.toString() + ":" + mm + " " + A;
-      } else {
-        return "-";
+      return moment(this.time, "HH:mm").format("h:mm a");
+      /*
+      // Check correct time format and split into components
+      let time = this.time
+        .toString()
+        .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [this.time];
+
+      if (time.length > 1) {
+        // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
       }
+      return time.join(""); // return adjusted time or original string
+      */
     },
   },
 };
