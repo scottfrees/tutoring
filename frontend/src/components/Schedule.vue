@@ -10,7 +10,10 @@ div
       span.mr-2(v-if="schedule.S") Saturday
       span.mr-2(v-if="schedule.U") Sunday
       br
-      span {{ schedule.start_time }} - {{ schedule.end_time }}
+      span 
+        Time(:time="schedule.start_time") 
+        span -
+        Time(:time="schedule.end_time")
 
     .col.col-6
       span.text-muted.mr-2
@@ -19,8 +22,8 @@ div
         ShortDate(:date="schedule.end")
       br
       span(v-if="schedule.virtual") Virtual: {{ schedule.virtual_link }}
-      span(v-else) Room: {{ schedule.room }}
-
+      span(v-else-if="schedule.room") Room: {{ schedule.room }}
+      span.text-info(v-if="schedule.appointment") Contact tutor for scheduling by appointment
       p.mt-2
         User(:user="schedule.tutor")
   .row
@@ -35,9 +38,10 @@ div
 <script>
 import User from "@/components/User";
 import ShortDate from "@/components/ShortDate";
+import Time from "@/components/CourseTime";
 export default {
   name: "Schedule",
   props: ["schedule"],
-  components: { User, ShortDate },
+  components: { User, ShortDate, Time },
 };
 </script>

@@ -30,7 +30,8 @@ router.get("/:date", aw(async (req, res) => {
     let results = []
     const query = {};
     if (search && search.trim().length) {
-        query.$text = { $search: search, $caseSensitive: false };
+        // Production has Mongo 2.6, which does not support caseSenstive flag 
+        query.$text = { $search: search/*, $caseSensitive: false */ };
     }
     query['schedules.start'] = { $lte: req.params.date };
     query['schedules.end'] = { $gte: req.params.date };

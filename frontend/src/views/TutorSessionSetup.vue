@@ -143,6 +143,12 @@
                 v-model="schedule.virtual"
               )
               label.form-check-label(for="virtual") Virtual / Video Conference (no room)
+            section.form-check
+              input#appointment.form-check-input(
+                type="checkbox",
+                v-model="schedule.appointment"
+              )
+              label.form-check-label(for="appointment") Schedule by appointment
 
           .col.col-6
             section.form-group(v-if="schedule.virtual")
