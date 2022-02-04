@@ -74,6 +74,9 @@
           button.btn.btn-primary.float-right.font-weight-bold(
             @click="remove_schedule(index)"
           ) x
+          button.btn.btn-info.float-right.font-weight-bold.mr-2(
+            @click="edit_schedule(index)"
+          ) ...
           Schedule(:schedule="s")
       hr
       .row.mb-4(v-if="!schedule")
@@ -133,7 +136,7 @@
             .row
               .col-4(v-for="(exception, index) in schedule.exceptions")
                 .alert.alert-danger.text-small
-                  small.mr-3 {{ exception }}
+                  small.mr-3: ShortDate(:date="exception")
                   a(href="#", @click="remove_exception(index)") x
         .row.mb-2
           .col.col-6.pt-4
@@ -160,8 +163,10 @@
                 option(v-for="room in rooms") {{ room }}
         .row
           .col.col-12
-            button.mr-2.btn.btn-success(@click="add_schedule") + Add
-            button.btn.btn-light(@click="schedule = null") Cancel
+            button.mr-2.btn.btn-success(@click="add_schedule")
+              span(v-if="editing_schedule") Save Change
+              span(v-else) + Add
+            button.btn.btn-light(@click="cancel_schedule_edit") Cancel
   //.card.my-3(v-if="ts")
     .card-body
       pre {{ JSON.stringify(ts, null, 2444) }}
@@ -187,10 +192,11 @@ import TutoringService from "@/api/tutoring";
 import User from "@/components/User";
 import Schedule from "@/components/Schedule";
 import Course from "@/components/Course";
+import ShortDate from "@/components/ShortDate";
 import { mapState } from "vuex";
 export default {
   name: "TutorSessionStartup",
-  components: { User, Schedule, Course },
+  components: { User, Schedule, Course, ShortDate },
   data: function () {
     return {
       schedule: null,
@@ -203,6 +209,9 @@ export default {
       selected_number: null,
       adding_course: false,
       exception: null,
+      editing_schedule: false,
+      before_edit: null,
+      editing_index: undefined,
     };
   },
   computed: {
@@ -309,13 +318,33 @@ export default {
       this.dirty = true;
     },
     add_schedule() {
-      this.ts.schedules.push(this.schedule);
+      if (!this.editing_schedule) {
+        this.ts.schedules.push(this.schedule);
+      }
       this.schedule = null;
       this.dirty = true;
+      this.editing_schedule = false;
+      this.before_edit = null;
+      this.editing_index = undefined;
+    },
+    cancel_schedule_edit() {
+      if (this.editing_schedule) {
+        this.ts.schedules[this.editing_index] = this.before_edit;
+      }
+      this.before_edit = undefined;
+      this.editing_index = undefined;
+      this.schedule = null;
+      this.editing_schedule = false;
     },
     remove_schedule(index) {
       this.ts.schedules.splice(index, 1);
       this.dirty = true;
+    },
+    edit_schedule(index) {
+      this.schedule = this.ts.schedules[index];
+      this.before_edit = JSON.parse(JSON.stringify(this.schedule));
+      this.editing_schedule = true;
+      this.editing_index = index;
     },
     remove_exception(index) {
       this.schedule.exceptions.splice(index, 1);
@@ -330,6 +359,7 @@ export default {
       this.dirty = true;
     },
     start_schedule_add() {
+      this.editing_schedule = false;
       this.schedule = {
         M: false,
         T: false,
