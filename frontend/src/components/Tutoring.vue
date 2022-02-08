@@ -4,7 +4,7 @@ div
     .col.col-md-5.col-sm-12
       h3 {{ tutoring.title }}
       .badge.badge-dark.p-2.m-1(
-        v-for="course in tutoring.courses",
+        v-for="course in sorted_courses",
         style="font-size: 8pt"
       ) 
         span.mr-2 {{ course }}
@@ -23,5 +23,14 @@ export default {
   name: "Tutoring",
   props: ["tutoring"],
   components: { Schedule, Course, User },
+  computed: {
+    sorted_courses() {
+      if (this.tutoring) {
+        return [...this.tutoring.courses].sort();
+      } else {
+        return [];
+      }
+    },
+  },
 };
 </script>

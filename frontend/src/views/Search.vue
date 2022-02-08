@@ -1,21 +1,24 @@
 <template  lang="pug">
 .container
-  .row.p-3(style="font-size: 2rem")
-    .col.col-8
-      .form-group
-        input.form-control(
-          style="font-size: 1rem",
-          type="search",
-          v-model="search",
-          placeholder="Search for tutoring session"
-        )
-    .col.col-4
-      .form-group
-        input.form-control(
-          style="font-size: 1rem",
-          type="date",
-          v-model="date"
-        )
+  section
+    .row.p-3.pb-0(style="padding-bottom: 0px; font-size: 2rem")
+      .col.col-8.pb-0
+        .form-group
+          input.form-control(
+            style="font-size: 1rem",
+            type="search",
+            v-model="search",
+            placeholder="Search for tutoring session"
+          )
+      .col.col-4
+        .form-group
+          input.form-control(
+            style="font-size: 1rem",
+            type="date",
+            v-model="date"
+          )
+    p.text-muted.pl-3(style="padding-top: 0px") For questions regarding tutoring contact tutoring@rampao.edu
+
   ul.list-group.list-group-flush(v-if="tutorings.length > 0")
     li.list-group-item(
       v-for="tutoring in tutorings",
@@ -23,22 +26,25 @@
     )
       Tutoring(:tutoring="tutoring")
       br
-      button.btn.btn-light.btn-block(
-        v-if="!tutoring.details",
-        @click="tutoring.details = true"
-      ) More ...
-      .row(v-else)
-        .col.col-6
-          span.font-weight-bold.mr-2 Supervisor:
-          User(:user="tutoring.supervisor")
-        .col.col-6(v-if="tutoring.notes")
-          span.font-weight-bold.mr-2 Notes:
-          span {{ tutoring.notes }}
+      section(v-if="tutoring.supervisor || tutoring.notes")
+        button.btn.btn-info.btn-block(
+          v-if="!tutoring.details",
+          @click="tutoring.details = true"
+        ) More ...
+        .row(v-else)
+          .col.col-6
+            section(v-if="tutoring.supervisor")
+              span.font-weight-bold.mr-2 Supervisor:
+              User(:user="tutoring.supervisor")
+          .col.col-6(v-if="tutoring.notes")
+            section(v-if="tutoring.notes")
+              span.font-weight-bold.mr-2 Notes:
+              span {{ tutoring.notes }}
 
-        button.mt-2.btn.btn-light.btn-block(
-          v-if="tutoring.details",
-          @click="tutoring.details = false"
-        ) Close ...
+          button.mt-2.btn.btn-light.btn-block(
+            v-if="tutoring.details",
+            @click="tutoring.details = false"
+          ) Close ...
   section.p-5.text-center(v-else)
     h3.text-muted No results
 </template>
