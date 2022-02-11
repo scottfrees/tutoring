@@ -27,7 +27,7 @@ div
       p(v-if="schedule.virtual") Virtual: {{ schedule.virtual_link }}
       p(v-else-if="schedule.room") Room: {{ schedule.room }}
       p.text-info(v-if="schedule.appointment") Contact tutor for scheduling by appointment
-      p.text-success(v-if="schedule.connect") Schedule appointments using connect
+      p.text-success(v-if="schedule.connect") Schedule appointments using Connect
       p.mt-2
         User(:user="schedule.tutor")
   .row
