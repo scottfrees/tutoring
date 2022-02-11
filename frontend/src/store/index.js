@@ -19,10 +19,11 @@ export default new Vuex.Store({
   mutations: {
     users(state, users) {
       if (users) {
-        console.log(users);
+
         state.admins = users.filter(u => u.roles.indexOf('admin') >= 0).sort((a, b) => a.name.last.localeCompare(b.name.last));
         state.staff = users.filter(u => u.roles.indexOf('staff') >= 0).sort((a, b) => a.name.last.localeCompare(b.name.last));
         state.tutors = users.filter(u => u.roles.indexOf('tutor') >= 0).sort((a, b) => a.name.last.localeCompare(b.name.last));
+
       } else {
         state.is_admin = state.is_staff = state.is_tutor = false;
       }

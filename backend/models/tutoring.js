@@ -46,6 +46,9 @@ const s = new Schema({
         appointment: {
             type: Boolean
         },
+        connect: {
+            type: Boolean
+        },
         room: {
             type: String
         },

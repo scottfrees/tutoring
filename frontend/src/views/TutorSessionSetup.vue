@@ -152,6 +152,12 @@
                 v-model="schedule.appointment"
               )
               label.form-check-label(for="appointment") Schedule by appointment
+            section.form-check
+              input#connect.form-check-input(
+                type="checkbox",
+                v-model="schedule.connect"
+              )
+              label.form-check-label(for="connect") Schedule appointments using Connect
 
           .col.col-6
             section.form-group(v-if="schedule.virtual")
