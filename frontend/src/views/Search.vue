@@ -17,7 +17,7 @@
             type="date",
             v-model="date"
           )
-    p.text-muted.pl-3(style="padding-top: 0px") For questions regarding tutoring contact tutoring@rampao.edu
+    p.text-primary.pl-3(style="padding-top: 0px") For questions regarding tutoring contact tutoring@rampao.edu
 
   ul.list-group.list-group-flush(v-if="tutorings.length > 0")
     li.list-group-item(
@@ -26,7 +26,9 @@
     )
       Tutoring(:tutoring="tutoring")
       br
-      section(v-if="tutoring.supervisor || tutoring.notes")
+      section(
+        v-if="tutoring.supervisor || (tutoring.notes && tutoring.courses.length > 0)"
+      )
         button.btn.btn-info.btn-block(
           v-if="!tutoring.details",
           @click="tutoring.details = true"
@@ -36,7 +38,7 @@
             section(v-if="tutoring.supervisor")
               span.font-weight-bold.mr-2 Supervisor:
               User(:user="tutoring.supervisor")
-          .col.col-6(v-if="tutoring.notes")
+          .col.col-6(v-if="tutoring.notes && tutoring.courses.length > 0")
             section(v-if="tutoring.notes")
               span.font-weight-bold.mr-2 Notes:
               span {{ tutoring.notes }}
