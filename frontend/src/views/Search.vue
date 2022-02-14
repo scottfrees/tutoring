@@ -17,7 +17,9 @@
             type="date",
             v-model="date"
           )
-    p.text-primary.pl-3(style="padding-top: 0px") For questions regarding tutoring contact tutoring@rampao.edu
+    p.text-primary.pl-3(style="padding-top: 0px") 
+      span.mr-1 For questions regarding tutoring contact
+      a(href="mailto:tutoring@ramapo.edu") tutoring@ramapo.edu
 
   ul.list-group.list-group-flush(v-if="tutorings.length > 0")
     li.list-group-item(
