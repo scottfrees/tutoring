@@ -25,7 +25,7 @@ const rollover = function (course) {
         title: course.CRSE_TITLE,
         subtitle: course.TITLE,
         school: school_rollover[course.COLL] || "X",
-        term: course.TERM,
+        term: "202240",
         credits: course.CHRS,
         session: course.SESS,
         days: {
@@ -60,7 +60,7 @@ const rollover = function (course) {
     return _course;
 }
 const read = async () => {
-    const data = await readXlsxFile('data/202202.xlsx');
+    const data = await readXlsxFile('data/202240.xlsx');
     const headers = data[0];
     for (let i = 1; i < data.length; i++) {
         const row = data[i];
@@ -78,6 +78,8 @@ const read = async () => {
             return true;
 
         }
+        console.log(JSON.stringify(course, null, 2));
+        //process.exit();
         if (roll(course)) {
             const section = rollover(course);
             await sections.create(section);

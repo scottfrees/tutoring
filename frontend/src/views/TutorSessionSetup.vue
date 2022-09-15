@@ -233,7 +233,7 @@ export default {
     async selected_subject() {
       if (this.selected_subject) {
         this.numbers = await SubjectService.numbers(
-          "202220",
+          "202240",
           this.selected_subject
         );
         this.selected_number = null;
@@ -243,7 +243,7 @@ export default {
     async selected_number() {
       if (this.selected_number) {
         this.sections = await SubjectService.sections(
-          "202220",
+          "202240",
           this.selected_subject,
           this.selected_number
         );
@@ -263,7 +263,7 @@ export default {
       this.$router.push("/tutoring");
     }
 
-    this.subjects = await SubjectService.subjects("202220");
+    this.subjects = await SubjectService.subjects("202240");
   },
   created() {
     window.addEventListener("beforeunload", this.beforeWindowUnload);
