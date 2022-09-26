@@ -130,7 +130,7 @@
               .col-4.text-right
                 p {{ user.email }}
               .col-2.text-right
-                div(v-if="is_admin")
+                div(v-if="is_staff")
                   button.btn.btn-info.btn-sm(
                     data-toggle="modal",
                     data-target="#active_user",
