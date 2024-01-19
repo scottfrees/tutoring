@@ -1,6 +1,6 @@
 <template  lang="pug">
 .container
-      .card.my-3(v-if="is_admin")
+      .card.my-3(v-if="is_admin || is_staff")
         .card-header
           h4 Search log
           
