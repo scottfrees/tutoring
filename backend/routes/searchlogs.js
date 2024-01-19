@@ -24,9 +24,7 @@ router.get("/", security.staff_and_up, aw(async (req, res) => {
     for (let i = 0; i < results.length; i++) {
         const result = results[i];
         let merged = result;
-        console.log('Merging [' + result.search + ']');
         const neighbors = results.slice(i + 1).filter(p => p.sdate == result.sdate);
-        console.log(` -- ${neighbors.length} neighbors`)
         // Work through each neighbor in order (they are ordered by time).
         for (let j = 0; j < neighbors.length; j++) {
             const neighbor = neighbors[j];
@@ -34,11 +32,8 @@ router.get("/", security.staff_and_up, aw(async (req, res) => {
             if (elapsed < 10000 && neighbor.search.indexOf(merged.search) === 0) {
                 // This neighbor contains the merged, so update the merged with this one
                 merged = neighbor;
-                console.log(` -- ${neighbor.search} gobbled`)
-            } else {
-                console.log(` -- ${neighbor.search} skipped`)
+
             }
-            // If the neighbor doesn't contain merged, then just skip it.  Could be from a different user
         }
         // Multiple results may lead to the same merged value.  The merged value is the superset of 
         // of all the incremental search terms.  We don't want multiple incremental searches to be in the 
