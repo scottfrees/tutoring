@@ -60,7 +60,7 @@ const rollover = function (course) {
     return _course;
 }
 const read = async () => {
-    const data = await readXlsxFile('data/202240.xlsx');
+    const data = await readXlsxFile('data/202420.xlsx');
     const headers = data[0];
     for (let i = 1; i < data.length; i++) {
         const row = data[i];

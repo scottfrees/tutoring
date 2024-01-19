@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const tutoring = require('../models/tutoring');
+const searchLogs = require('../models/searchLog');
 const aw = require('../middleware/async_wrap');
 const security = require('../logic/security');
 
@@ -37,6 +38,23 @@ router.get("/:date", aw(async (req, res) => {
     query['schedules.end'] = { $gte: req.params.date };
     console.log(query);
     results = await tutoring.find(query).populate('supervisor').populate({ path: 'schedules', populate: { path: 'tutor' } });
+
+    const searchLog = {
+        date: new Date(),
+        sdate: req.params.date,
+
+        search: search,
+        results: results.length,
+        resultsDetails: results.map(r => r.title).join(", ")
+    }
+
+    searchLogs.create(searchLog);
+    console.log(searchLog);
+    // Add a TTL of 6 months so the search log can't grow forever.
+
+    // Reporting:
+    // For each search, see if there is a search within 2 seconds that contains the same search, and absorb it.
+
     res.json(results);
 }));
 
