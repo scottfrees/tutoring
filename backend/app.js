@@ -65,6 +65,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/rooms', require('./routes/rooms'));
 app.use('/api/sections', require('./routes/sections'));
 app.use('/api/tutoring', require('./routes/tutoring'));
+app.use('/api/searchlogs', require('./routes/searchlogs'));
 app.use('/api/auth', require('./routes/authentication'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => { res.sendFile(path.join(__dirname, 'public', 'index.html')); });
