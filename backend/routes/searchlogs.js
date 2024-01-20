@@ -13,14 +13,7 @@ router.use((req, res, next) => {
         next();
     }
 });
-
-const report = async (req, res) => {
-    const from = moment(req.query.from, "YYYY-MM-DD").startOf('day');
-    const until = moment(req.query.until, "YYYY-MM-DD").endOf('day');
-
-    const results = await logs.find({ date: { $gte: from.toDate(), $lte: until.toDate() } }).sort('date');
-
-    // Merging results.  For each result, see if there is another result within 2 seconds with the same sdate and use that.
+const merge_results = (results) => {
     const processed = new Map();
 
     for (let i = 0; i < results.length; i++) {
@@ -41,7 +34,18 @@ const report = async (req, res) => {
         // processed set, so we tag with sdate and getTime to avoid.
         processed.set(`${merged.sdate}-${merged.date.getTime()}-${merged.search}`, merged);
     }
-    return Array.from(processed.values()).map(r => {
+    return Array.from(processed.values());
+}
+const report = async (req, res) => {
+    const from = moment(req.query.from, "YYYY-MM-DD").startOf('day');
+    const until = moment(req.query.until, "YYYY-MM-DD").endOf('day');
+
+    const results = await logs.find({ date: { $gte: from.toDate(), $lte: until.toDate() } }).sort('date');
+
+    // Merging results.  For each result, see if there is another result within 2 seconds with the same sdate and use that.
+    const forward = merge_results(results);
+    const backward = merge_results(forward.reverse()).reverse();
+    return backward.map(r => {
         return {
             "Timestamp": moment(r.date).format("YYYY-MM-DD HH:mm:ss"),
             "Search_String": r.search,
