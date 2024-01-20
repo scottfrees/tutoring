@@ -2,6 +2,7 @@
 .container
       .card.my-3(v-if="is_admin || is_staff")
         .card-header
+          button(type='button' class="btn btn-primary float-right" @click="download") Export
           h4 Search log
           
         .card-body
@@ -53,7 +54,15 @@
         this.fetchLogs();
       },
       methods: {
-        
+        download: async function () {
+            const data = await SearchLog.download();
+            const url = window.URL.createObjectURL(new Blob([data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "searchlog.xlsx");
+            document.body.appendChild(link);
+            link.click();
+        },
         fetchLogs: async function () {
             this.logs = await SearchLog.fetch();
             console.log(this.logs)

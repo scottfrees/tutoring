@@ -39,21 +39,19 @@ router.get("/:date", aw(async (req, res) => {
     console.log(query);
     results = await tutoring.find(query).populate('supervisor').populate({ path: 'schedules', populate: { path: 'tutor' } });
 
-    const searchLog = {
-        date: new Date(),
-        sdate: req.params.date,
+    if (search && search.trim().length) {
+        const searchLog = {
+            date: new Date(),
+            sdate: req.params.date,
 
-        search: search,
-        results: results.length,
-        resultsDetails: results.map(r => r.title).join(", ")
+            search: search,
+            results: results.length,
+            resultsDetails: results.map(r => r.title).join(", ")
+        }
+        searchLogs.create(searchLog);
     }
 
-    searchLogs.create(searchLog);
-    console.log(searchLog);
-    // Add a TTL of 6 months so the search log can't grow forever.
 
-    // Reporting:
-    // For each search, see if there is a search within 2 seconds that contains the same search, and absorb it.
 
     res.json(results);
 }));
