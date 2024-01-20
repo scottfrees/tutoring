@@ -46,7 +46,7 @@ router.get("/:date", aw(async (req, res) => {
 
             search: search,
             results: results.length,
-            resultsDetails: results.map(r => r.title).join(", ")
+            resultsDetails: results.filter(r => r.title).map(r => r.title).join(", ")
         }
         searchLogs.create(searchLog);
     }

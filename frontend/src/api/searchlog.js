@@ -1,18 +1,18 @@
 import api from '@/api/base'
 
 export default {
-    async fetch() {
+    async fetch(q) {
         try {
-            const response = await api().get(`/searchlogs`);
+            const response = await api().get(`/searchlogs`, { params: q });
             return response.data;
         } catch (ex) {
             console.log(ex);
             return undefined;
         }
     },
-    async download() {
+    async download(q) {
         try {
-            const response = await api().get(`/searchlogs/export`, { responseType: 'blob' });
+            const response = await api().get(`/searchlogs/export`, { params: q, responseType: 'blob' });
             return response.data;
         } catch (ex) {
             console.log(ex);
