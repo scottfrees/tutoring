@@ -8,7 +8,8 @@ const s = new Schema({
     },
     date: {
         type: Date,
-        required: true
+        required: true,
+        expires: 60 * 60 * 24 * 180 // 180 days
     },
     sdate: {
         type: String,
