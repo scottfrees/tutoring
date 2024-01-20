@@ -4,6 +4,7 @@ const logs = require('../models/searchLog');
 const aw = require('../middleware/async_wrap');
 const security = require('../logic/security');
 const toxl = require('jsonexcel');
+const moment = require('moment');
 
 router.use((req, res, next) => {
     if (!req.session.user) {
@@ -14,7 +15,10 @@ router.use((req, res, next) => {
 });
 
 const report = async (req, res) => {
-    const results = await logs.find({}).sort('date');
+    const from = moment(req.query.from, "YYYY-MM-DD").startOf('day');
+    const until = moment(req.query.until, "YYYY-MM-DD").endOf('day');
+
+    const results = await logs.find({ date: { $gte: from.toDate(), $lte: until.toDate() } }).sort('date');
 
     // Merging results.  For each result, see if there is another result within 2 seconds with the same sdate and use that.
     const processed = new Map();
@@ -38,7 +42,15 @@ const report = async (req, res) => {
         // processed set, so we tag with sdate and getTime to avoid.
         processed.set(`${merged.sdate}-${merged.date.getTime()}-${merged.search}`, merged);
     }
-    return Array.from(processed.values());
+    return Array.from(processed.values()).map(r => {
+        return {
+            "Timestamp": moment(r.date).format("YYYY-MM-DD HH:mm:ss"),
+            "Search_String": r.search,
+            "Search_Date": r.sdate,
+            "Results": r.results,
+            "Results_Details": r.resultsDetails
+        }
+    });
 }
 
 router.get("/", security.staff_and_up, aw(async (req, res) => {
@@ -53,21 +65,7 @@ router.get("/export", security.staff_and_up, aw(async (req, res) => {
         delimiter: "."
     }
 
-    const buffer = toxl(results.map(r => {
-        console.log(r.date)
-        intlDateObj = new Intl.DateTimeFormat('en-US', {
-            dateStyle: 'short',
-            timeStyle: 'long',
-            timeZone: "America/New_York"
-        });
-        return {
-            "Timestamp": intlDateObj.format(r.date),
-            "Search_String": r.search,
-            "Search_Date": r.sdate,
-            "Results": r.results,
-            "Results Details": r.resultsDetails
-        }
-    }), opts);
+    const buffer = toxl(results, opts);
     res.setHeader('Content-Type', 'application/vnd.openxmlformats');
     res.setHeader("Content-Disposition", "attachment; filename=" + "Tutoring Search Logs.xlsx");
     res.end(buffer);
