@@ -31,10 +31,9 @@ const report = async (req, res) => {
         for (let j = 0; j < neighbors.length; j++) {
             const neighbor = neighbors[j];
             const elapsed = Math.abs(neighbor.date.getTime() - merged.date.getTime())
-            if (elapsed < 5000 && neighbor.search.indexOf(merged.search) === 0) {
+            if (elapsed < 8000 && neighbor.search.indexOf(merged.search) === 0) {
                 // This neighbor contains the merged, so update the merged with this one
                 merged = neighbor;
-
             }
         }
         // Multiple results may lead to the same merged value.  The merged value is the superset of 
