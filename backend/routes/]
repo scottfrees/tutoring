@@ -42,8 +42,7 @@ const merge_results = (results) => {
     }
 
     const mergedChunks = chunks.map(chunk => _merge_results(chunk));
-    return [].concat.apply([], mergedChunks);
-//return mergedChunks.flat();
+    return mergedChunks.flat();
 }
 
 
