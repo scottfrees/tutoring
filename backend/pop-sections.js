@@ -60,7 +60,7 @@ const rollover = function (course) {
     return _course;
 }
 const read = async () => {
-    const data = await readXlsxFile('data/202420.xlsx');
+    const data = await readXlsxFile('data/202540.xlsx');
     const headers = data[0];
     for (let i = 1; i < data.length; i++) {
         const row = data[i];
@@ -73,6 +73,7 @@ const read = async () => {
         const skips = ["100", "200", "300", "400", "500", "600", "700", "800", "900", "388", "000"]
         const honors = ["301", "302", "401", "402"]
         const roll = (c) => {
+	    if (!c.CHRS) return false;
             if (skips.indexOf(c.CRSE.toString()) >= 0) return false;
             if (c.SUBJ == "SRSH" && honors.indexOf(c.CRSE.toString()) >= 0) return false;
             return true;
