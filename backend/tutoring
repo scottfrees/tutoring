@@ -1,0 +1,102 @@
+Thu, 03 Feb 2022 14:06:21 GMT express-session deprecated undefined resave option; provide resave option at app.js:59:9
+Thu, 03 Feb 2022 14:06:21 GMT express-session deprecated undefined saveUninitialized option; provide saveUninitialized option at app.js:59:9
+(node:2681) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+patriciakal2003@gmail.com - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [patriciakal2003@gmail.com]
+patriciakal2003@gmail.com - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [patriciakal2003@gmail.com]
+mswitala@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [mswitala@ramapo.edu]
+mswitala@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [mswitala@ramapo.edu]
+mswitala@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [mswitala@ramapo.edu]
+ - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user []
+kkerton - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [kkerton]
+kkerton - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [kkerton]
+kkerton - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [kkerton]
+kkerton - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [kkerton]
+kkerton@ramapo.com - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [kkerton@ramapo.com]
+ - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user []
+a.brockner@hotmail.com - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [a.brockner@hotmail.com]
+dkica1@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dkica1@ramapo.edu]
+dkica1@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dkica1@ramapo.edu]
+dkica1@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dkica1@ramapo.edu]
+dkica1@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dkica1@ramapo.edu]
+dkica1@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dkica1@ramapo.edu]
+m.nelson02@verizon.net - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [m.nelson02@verizon.net]
+m.nelson02@verizon.net - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [m.nelson02@verizon.net]
+R00724981 - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [R00724981]
+dbenavid@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dbenavid@ramapo.edu]
+dbenavid@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [dbenavid@ramapo.edu]
+Fri, 11 Feb 2022 03:30:25 GMT express-session deprecated undefined resave option; provide resave option at app.js:59:9
+Fri, 11 Feb 2022 03:30:25 GMT express-session deprecated undefined saveUninitialized option; provide saveUninitialized option at app.js:59:9
+(node:9059) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+Tue, 08 Aug 2023 13:55:21 GMT express-session deprecated undefined resave option; provide resave option at app.js:59:9
+Tue, 08 Aug 2023 13:55:21 GMT express-session deprecated undefined saveUninitialized option; provide saveUninitialized option at app.js:59:9
+(node:2047) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+sfrees - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [sfrees]
+mguvener@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [mguvener@ramapo.edu]
+robert.brauman@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [robert.brauman@ramapo.edu]
+robert.brauman@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [robert.brauman@ramapo.edu]
+bethchristman716@gmail.com - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [bethchristman716@gmail.com]
+echristm@ramapo.edu - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [echristm@ramapo.edu]
+R00741854 - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [R00741854]
+vitalipnu@gmail.com - account credentials could not be verified.
+{ success: false }
+-!- Unauthorized access attempt by user [vitalipnu@gmail.com]

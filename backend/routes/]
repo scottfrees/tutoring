@@ -4,7 +4,7 @@ const logs = require('../models/searchLog');
 const aw = require('../middleware/async_wrap');
 const security = require('../logic/security');
 const toxl = require('jsonexcel');
-const { parse, startOfDay, endOfDay, format } = require('date-fns');
+const moment = require('moment');
 
 router.use((req, res, next) => {
     if (!req.session.user) {
@@ -42,20 +42,16 @@ const merge_results = (results) => {
     }
 
     const mergedChunks = chunks.map(chunk => _merge_results(chunk));
-    return [].concat.apply([], mergedChunks);
-//return mergedChunks.flat();
+    return mergedChunks.flat();
 }
 
 
 const report = async (req, res) => {
-    // Parse date strings and get start/end of day
-    const fromDate = parse(req.query.from, "yyyy-MM-dd", new Date());
-    const untilDate = parse(req.query.until, "yyyy-MM-dd", new Date());
-    const from = startOfDay(fromDate);
-    const until = endOfDay(untilDate);
+    const from = moment(req.query.from, "YYYY-MM-DD").startOf('day');
+    const until = moment(req.query.until, "YYYY-MM-DD").endOf('day');
 
-    const results = await logs.find({ date: { $gte: from, $lte: until } }).sort('date');
-
+    const results = await logs.find({ date: { $gte: from.toDate(), $lte: until.toDate() } }).sort('date');
+    console.log(`Unmerged: ${results.length}`);
     // Merging results.  For each result, see if there is another result within 2 seconds with the same sdate and use that.
     const forward = merge_results(results);
     console.log(`merged (f); ${results.length}`);
@@ -63,7 +59,7 @@ const report = async (req, res) => {
     console.log(`merged (b): ${results.length}`);
     return backward.map(r => {
         return {
-            "Timestamp": format(r.date, "yyyy-MM-dd HH:mm:ss"),
+            "Timestamp": moment(r.date).format("YYYY-MM-DD HH:mm:ss"),
             "Search_String": r.search,
             "Search_Date": r.sdate,
             "Results": r.results,

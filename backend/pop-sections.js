@@ -73,6 +73,7 @@ const read = async () => {
         const skips = ["100", "200", "300", "400", "500", "600", "700", "800", "900", "388", "000"]
         const honors = ["301", "302", "401", "402"]
         const roll = (c) => {
+	    if (!c.CHRS) return false;
             if (skips.indexOf(c.CRSE.toString()) >= 0) return false;
             if (c.SUBJ == "SRSH" && honors.indexOf(c.CRSE.toString()) >= 0) return false;
             return true;

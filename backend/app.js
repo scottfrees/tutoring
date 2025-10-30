@@ -13,6 +13,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { nextTick } = require('process');
 
+const certificatebundle = require('certificate-bundle-loader');
+certificatebundle.addCertificates();
+
 //----------------------------------------
 // Check for requried environment variables
 const env = ['MONGO_URL'];
