@@ -9,6 +9,9 @@
     },
     "author": "",
     "license": "ISC",
+    "overrides": {
+        "winston": "3.3.3"
+    },
     "dependencies": {
         "body-parser": "^1.19.0",
         "certificate-bundle-loader": "^1.0.3",
