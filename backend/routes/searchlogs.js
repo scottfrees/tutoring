@@ -4,7 +4,7 @@ const logs = require('../models/searchLog');
 const aw = require('../middleware/async_wrap');
 const security = require('../logic/security');
 const toxl = require('jsonexcel');
-const moment = require('moment');
+const { parse, startOfDay, endOfDay, format } = require('date-fns');
 
 router.use((req, res, next) => {
     if (!req.session.user) {
@@ -37,17 +37,20 @@ const merge_results = (results) => {
     return Array.from(processed.values());
 }
 const report = async (req, res) => {
-    const from = moment(req.query.from, "YYYY-MM-DD").startOf('day');
-    const until = moment(req.query.until, "YYYY-MM-DD").endOf('day');
+    // Parse date strings and get start/end of day
+    const fromDate = parse(req.query.from, "yyyy-MM-dd", new Date());
+    const untilDate = parse(req.query.until, "yyyy-MM-dd", new Date());
+    const from = startOfDay(fromDate);
+    const until = endOfDay(untilDate);
 
-    const results = await logs.find({ date: { $gte: from.toDate(), $lte: until.toDate() } }).sort('date');
+    const results = await logs.find({ date: { $gte: from, $lte: until } }).sort('date');
 
     // Merging results.  For each result, see if there is another result within 2 seconds with the same sdate and use that.
     const forward = merge_results(results);
     const backward = merge_results(forward.reverse()).reverse();
     return backward.map(r => {
         return {
-            "Timestamp": moment(r.date).format("YYYY-MM-DD HH:mm:ss"),
+            "Timestamp": format(r.date, "yyyy-MM-dd HH:mm:ss"),
             "Search_String": r.search,
             "Search_Date": r.sdate,
             "Results": r.results,

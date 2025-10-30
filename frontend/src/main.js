@@ -7,9 +7,7 @@ import "bootstrap";
 import "../node_modules/bootswatch/dist/simplex/bootstrap.min.css";
 import "jquery";
 import "popper.js";
-import moment from 'moment';
 
-Vue.prototype.moment = moment;
 Vue.config.productionTip = false
 
 new Vue({

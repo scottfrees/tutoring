@@ -4,13 +4,15 @@ span {{ display }}
 
 
 <script>
-import moment from "moment";
+import { parseISO, format } from "date-fns";
 export default {
   name: "ShortDate",
   props: ["date"],
   computed: {
     display() {
-      return moment(this.date, "YYYY-MM-DD").format("MMM D");
+      // Parse ISO date string (YYYY-MM-DD) and format as abbreviated month + day
+      const parsed = parseISO(this.date);
+      return format(parsed, "MMM d");
     },
   },
 };
