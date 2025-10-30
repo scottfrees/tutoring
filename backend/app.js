@@ -13,8 +13,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { nextTick } = require('process');
 
-const certificatebundle = require('certificate-bundle-loader');
-certificatebundle.addCertificates();
+// Certificate bundle loader removed - incompatible with Node v10
+// const certificatebundle = require('certificate-bundle-loader');
+// certificatebundle.addCertificates();
 
 //----------------------------------------
 // Check for requried environment variables
